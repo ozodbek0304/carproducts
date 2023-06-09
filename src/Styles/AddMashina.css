@@ -1,0 +1,18 @@
+.iconka1{
+    width: 16px;
+    height: 32px;
+    border-radius: 4px;
+    background-color: #CABDFF;
+}
+.btncontainer{
+    transform: translate(850px, 20px);
+}
+.fa-xmark{
+   padding: 5px;
+   width: 30px;
+   height: 30px;
+   background-color: #EFEFEF;
+   display: grid;
+   place-content: center;
+   border-radius: 36px  ;
+}

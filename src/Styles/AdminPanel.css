@@ -1,0 +1,21 @@
+header{
+    background-color: #FCFCFC;
+    position:sticky;
+    z-index: 9999;
+    top: 0;
+}
+.containerTable{
+    background-color: #FCFCFC;
+    height: 750px;
+    margin-top: 1rem;
+}
+.iconka{
+    width: 16px;
+    height: 32px;
+    border-radius: 4px;
+    background-color: #FFD88D;
+}
+.fa-arrow-right{
+    transform: translateX(50px);
+    font-size: 18px;
+}
