@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from "axios";
+
 const Login = () => {
-  const navgation=useNavigate();
   const[values, setValues]=useState({email:"", password:""});
+
+  const navgation=useNavigate();
   
   useEffect(()=>{
   let token=localStorage.getItem("token");
@@ -13,28 +15,32 @@ const Login = () => {
     if (token) navgation("/adminpanel")
  
   },[])
+
+  async function handleLogin(e){
+    e.preventDefault()
+   
+    try {
+        
+      let res = await axios.post("https://reqres.in/api/login", values);
+  
+      if (res.status===200 ) {
+        toast("Logged success", { type: "success" });
+        localStorage.setItem("token", res.data.token);
+        setValues({email:"",password:""});
+        navigate("/adminpanel")
+      } 
+    } catch (error) {
+      toast(error.response.data.error,{type:"error"});
+    } finally {
+        setValues({ email: "", password: "" });
+    } 
+    }
+
   function handleInputChange(e){
     setValues(item=>({...item, [e.target.name]:e.target.value}))
   }
 
-   async function handleLogin(e){
-  e.preventDefault()
  
-  try {
-      
-    let res = await axios.post("https://reqres.in/api/login", values);
-
-    if (res.status===200 ) {
-      toast("Logged success", { type: "success" });
-      localStorage.setItem("token", res.data.token);
-      navigate("/adminpanel")
-    } 
-  } catch (error) {
-    toast(error.response.data.error,{type:"error"});
-  } finally {
-      setValues({ email: "", password: "" });
-  } 
-  }
   return (
     <div>
       <div className="container d-flex justify-content-center Login_container  align-items-center min-vh-100">
